@@ -30,7 +30,7 @@ class ProfileData extends Component {
                 </div>
 
                 <div className='messages'>
-                  <a href={`${this.props.baseurl}/secondchances/messages`} target='_blank'><img src={msgicon} alt='message center'/></a>
+                  <a href={`${this.props.baseurl}/secondchances/messages/${this.props.currProfile.user}/`} target='_blank'><img src={msgicon} alt='message center'/></a>
                 </div>
               </div>
             );

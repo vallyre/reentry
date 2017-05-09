@@ -28,7 +28,8 @@ class Profile extends Component {
         firstname: null,
         lastname: null,
         email: null,
-        bio: null
+        bio: null,
+        user: null
       },
       // userid: 1,
       userid: localStorage.getItem("userID"),
@@ -247,7 +248,7 @@ class Profile extends Component {
                 <div style={styles.profileBody}>
 
                     <div>
-                      <HeaderBar innerText='Profile Info' />
+                      <HeaderBar innerText='Your Profile' />
                       <div>
                         {this.showProfileForm()}
                       </div>
@@ -255,17 +256,17 @@ class Profile extends Component {
 
                     <Accordion className='section-skills'>
 
-                        <Panel header="My Skills" eventKey='1'>
+                        <Panel header="Your Skills" eventKey='1'>
                         <ChooseForm choose='skills' baseurl={this.props.baseurl} userid={this.state.userid} allskills={this.state.allskills} postSkill={this.postSkill}/>
                           <Chips chipData={this.state.userskills} choose='skills' deleteChip={this.deleteChip} />
                         </Panel>
 
-                        <Panel header="My Locations" eventKey='2'>
+                        <Panel header="Your Locations" eventKey='2'>
                           <ChooseForm choose='locations' baseurl={this.props.baseurl} userid={this.state.userid} alllocations={this.state.alllocations} postLocation={this.postLocation}/>
                           <Chips chipData={this.state.userlocations} choose='locations' deleteChip={this.deleteChip} />
                         </Panel>
 
-                        <Panel header="Jobs Matched To Me" eventKey='3'>
+                        <Panel header="Jobs Matched To You" eventKey='3'>
                           <h1>You've matched {this.state.userjobs.length} jobs</h1>
                           <p>Click a job to view details.</p>
                           <ShowJobs jobs={this.state.userjobs} baseurl={this.props.baseurl} />
@@ -275,15 +276,15 @@ class Profile extends Component {
                           <ShowJobs jobs={this.state.alljobs} baseurl={this.props.baseurl}/>
                         </Panel>
 
-                        <Panel header="Post A Job" eventKey='5'>
+                        <Panel header="Post Your Job" eventKey='5'>
                           <PostJob choose='jobskills' baseurl={this.props.baseurl} allskills={this.state.allskills} userid={this.state.userid} getData={this.getData} deleteChip={this.deleteChip}/>
                         </Panel>
 
-                        <Panel header="Jobs I've Posted" eventKey='6'>
+                        <Panel header="Jobs You've Posted" eventKey='6'>
                           <ShowJobs jobs={this.state.myjobs} baseurl={this.props.baseurl} />
                         </Panel>
 
-                        <Panel header='Messages' eventKey='7'>
+                        <Panel header='Your Messages' eventKey='7'>
                           <button><a href={`${this.props.baseurl}/secondchances/messages`} target='_blank' >Click to enter the Message Center</a></button>
                         </Panel>
 
