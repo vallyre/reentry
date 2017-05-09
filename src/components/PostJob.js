@@ -22,7 +22,7 @@ class PostJob extends Component {
 
   displayMessage() {
     document.getElementById('message').innerHTML = '';
-    document.getElementById('message').innerHTML = 'Job Posted! Now enter some skills';
+    document.getElementById('message').innerHTML = 'Job Posted!';
     document.getElementById('job-form').reset();
   }
 
@@ -36,6 +36,7 @@ class PostJob extends Component {
     }).then((response) => {
       console.log('success! job posted', response);
       this.setState({jobID: response.data.id});
+      this.getData('myjobs');
       this.displayMessage();
     }).catch(function(error) {
       console.log(error);
@@ -63,11 +64,11 @@ class PostJob extends Component {
   }
 
 
-
     render() {
 
         return (
             <div>
+              <p id='message'></p>
               <JobForm
                 baseurl={this.props.baseurl}
                 allskills={this.props.allskills}

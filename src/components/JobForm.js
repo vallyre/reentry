@@ -13,13 +13,15 @@ class JobForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.createJob = this.createJob.bind(this);
     this.renderChip = this.renderChip.bind(this);
+    this.showForm = this.showForm.bind(this);
     this.updateJobskills = this.updateJobskills.bind(this);
     this.state = {
       owner: localStorage.getItem("userID"),
       title: '',
       description: '',
       jobID: null,
-      jobskills: []
+      jobskills: [],
+      showform: true
     };
     this.styles = {
       chip: {
@@ -48,6 +50,7 @@ class JobForm extends React.Component {
       description: this.state.description
     };
     this.props.postJob(job);
+    this.setState({showform: false})
   }
 
   renderChip(data) {
@@ -70,6 +73,13 @@ class JobForm extends React.Component {
     this.props.postJobSkill(jobskill);
   }
 
+  showForm() {
+    this.setState({title: ''});
+    this.setState({description: ''});
+    this.setState({jobskills: []});
+    this.setState({showform: true});
+  }
+
     render() {
 
         const styles = {
@@ -88,47 +98,65 @@ class JobForm extends React.Component {
             }
         }
 
+        const showJobForm = this.state.showform;
+
         return (
           <div>
-            <form id='job-form' style={styles.postForm} onSubmit={this.createJob}>
-                <TextField
-                  type="text"
-                  name='title'
-                  id='title'
-                  value={this.state.title}
-                  onFocus={this.hideError}
-                  onChange={this.handleChange}
-                  hintText='job title'
-                  hintStyle={styles.hintStyle}
-                  underlineStyle={styles.underlineStyle}
-                  underlineFocusStyle={styles.underlineFocusStyle}
-                  required/>
-                <TextField
-                  type="text"
-                  name='description'
-                  value={this.state.description}
-                  onFocus={this.hideError}
-                  onChange={this.handleChange}
-                  multiLine={true}
-                  rows={1}
-                  hintText='describe this job'
-                  hintStyle={styles.hintStyle}
-                  underlineStyle={styles.underlineStyle}
-                  underlineFocusStyle={styles.underlineFocusStyle}
-                  required/>
-                <BtnSubmit type="submit" onClick={(e) => this.createJob(e)}>Create my Job</BtnSubmit>
-            </form>
-            <ChooseForm
-              choose={'jobskills'}
-              jobID={this.state.jobID}
-              baseurl={this.props.baseurl}
-              allskills={this.props.allskills}
-              updateJobskills={this.updateJobskills}
-              displayMessage={this.props.displayMessage}
-              owner={this.state.owner} />
-            <div style={this.styles.wrapper}>
-              {this.state.jobskills.map(this.renderChip, this)}
-            </div>
+            {(showJobForm) ? (
+
+              <section id='form-section'>
+                <h1>Tell us about your job.</h1>
+                <form id='job-form' style={styles.postForm} onSubmit={this.createJob}>
+                  <TextField
+                    type="text"
+                    name='title'
+                    id='title'
+                    value={this.state.title}
+                    onFocus={this.hideError}
+                    onChange={this.handleChange}
+                    hintText='job title'
+                    hintStyle={styles.hintStyle}
+                    underlineStyle={styles.underlineStyle}
+                    underlineFocusStyle={styles.underlineFocusStyle}
+                    required/>
+                  <TextField
+                    type="text"
+                    name='description'
+                    value={this.state.description}
+                    onFocus={this.hideError}
+                    onChange={this.handleChange}
+                    multiLine={true}
+                    rows={1}
+                    hintText='describe this job'
+                    hintStyle={styles.hintStyle}
+                    underlineStyle={styles.underlineStyle}
+                    underlineFocusStyle={styles.underlineFocusStyle}
+                    required/>
+                  <BtnSubmit type="submit" onClick={(e) => this.createJob(e)}>Create my Job</BtnSubmit>
+                </form>
+              </section>
+            ) : (
+              <section id='skills-section'>
+                <ChooseForm
+                  choose={'jobskills'}
+                  jobID={this.state.jobID}
+                  baseurl={this.props.baseurl}
+                  allskills={this.props.allskills}
+                  updateJobskills={this.updateJobskills}
+                  displayMessage={this.props.displayMessage}
+                  owner={this.state.owner} />
+                <div style={this.styles.wrapper}>
+                  {this.state.jobskills.map(this.renderChip, this)}
+
+                </div>
+            </section>
+          )
+        }
+        {(this.state.jobskills.length>0) ? (
+          <button onClick={this.showForm}>Enter Another Job</button>
+        ) : (
+          <p></p>
+        )}
           </div>
         );
     }

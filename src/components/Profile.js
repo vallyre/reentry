@@ -131,7 +131,7 @@ class Profile extends Component {
 
     if (this.state.profile.firstname !== null) {
       return (
-        <ProfileData currProfile={this.state.profile}/>
+        <ProfileData currProfile={this.state.profile} baseurl={this.props.baseurl}/>
       )
     } else {
       return (
@@ -149,12 +149,14 @@ class Profile extends Component {
     }).then((response) => {
       console.log('skillposted!!', response);
       this.getData('userskills');
+      this.getData('userjobs');
     }).catch(function(error) {
       console.log(error);
     });
   }
 
   postLocation(location) {
+    console.log('in postLocation');
     axios({
       method: 'POST',
       url:`${this.props.baseurl}/api/userlocation/`,
@@ -162,6 +164,7 @@ class Profile extends Component {
     }).then((response) => {
       console.log('locationposted!!', response);
       this.getData('userlocations');
+      this.getData('userjobs');
     }).catch(function(error) {
       console.log(error);
     });
@@ -209,6 +212,7 @@ class Profile extends Component {
     }).then((response) => {
       console.log('chip deleted!');
       this.getData(getdata);
+      this.getData('userjobs');
     }).catch(function(error) {
       console.log(error);
     });
@@ -254,46 +258,55 @@ class Profile extends Component {
                         <Panel header="My Skills" eventKey='1'>
                         <ChooseForm choose='skills' baseurl={this.props.baseurl} userid={this.state.userid} allskills={this.state.allskills} postSkill={this.postSkill}/>
                           <Chips chipData={this.state.userskills} choose='skills' deleteChip={this.deleteChip} />
-                      </Panel>
+                        </Panel>
 
-                      <Panel header="My Locations" eventKey='2'>
-                        <ChooseForm choose='locations' baseurl={this.props.baseurl} userid={this.state.userid} alllocations={this.state.alllocations} postLocation={this.postLocation}/>
-                        <Chips chipData={this.state.userlocations} choose='locations' deleteChip={this.deleteChip} />
+                        <Panel header="My Locations" eventKey='2'>
+                          <ChooseForm choose='locations' baseurl={this.props.baseurl} userid={this.state.userid} alllocations={this.state.alllocations} postLocation={this.postLocation}/>
+                          <Chips chipData={this.state.userlocations} choose='locations' deleteChip={this.deleteChip} />
+                        </Panel>
 
-                    </Panel>
+                        <Panel header="Jobs Matched To Me" eventKey='3'>
+                          <h1>You've matched {this.state.userjobs.length} jobs</h1>
+                          <p>Click a job to view details.</p>
+                          <ShowJobs jobs={this.state.userjobs} baseurl={this.props.baseurl} />
+                        </Panel>
 
-                    <Panel header="Post A Job" eventKey='3'>
-                      <PostJob choose='jobskills' baseurl={this.props.baseurl} allskills={this.state.allskills} userid={this.state.userid} deleteChip={this.deleteChip}/>
-                    </Panel>
+                        <Panel header="View All Jobs" eventKey='4'>
+                          <ShowJobs jobs={this.state.alljobs} baseurl={this.props.baseurl}/>
+                        </Panel>
 
-                    <Panel header="Jobs I've Posted" eventKey='4'>
-                      <ShowJobs jobs={this.state.myjobs} />
-                    </Panel>
+                        <Panel header="Post A Job" eventKey='5'>
+                          <PostJob choose='jobskills' baseurl={this.props.baseurl} allskills={this.state.allskills} userid={this.state.userid} getData={this.getData} deleteChip={this.deleteChip}/>
+                        </Panel>
 
-                    <Panel header="Jobs Matched To Me" eventKey='5'>
-                      <h3>You've matched {this.state.userjobs.length} jobs</h3>
-                        <p>Click a job to view details.</p>
-                        <ShowJobs jobs={this.state.userjobs} />
-                    </Panel>
+                        <Panel header="Jobs I've Posted" eventKey='6'>
+                          <ShowJobs jobs={this.state.myjobs} baseurl={this.props.baseurl} />
+                        </Panel>
 
-                    <Panel header="View All Jobs" eventKey='6'>
-                    <ShowJobs jobs={this.state.alljobs} />
-                  </Panel>
+                        <Panel header='Messages' eventKey='7'>
+                          <button><a href={`${this.props.baseurl}/secondchances/messages`} target='_blank' >Click to enter the Message Center</a></button>
+                        </Panel>
 
-                  <Panel header='Messages' eventKey='7'>
-                    <p>Bunch of Messages</p>
-                    <p>Bunch of Messages</p>
-                    <p>Bunch of Messages</p>
-                    <p>Bunch of Messages</p>
-                    <p>Bunch of Messages</p>
-                  </Panel>
-
-                  <Panel header='Resources' eventKey='8'>
-                    <p>Housing</p>
-                    <p>Mental Health</p>
-                    <p>OtherStuff</p>
-                  </Panel>
-                </Accordion>
+                        <Panel header='Resources' eventKey='8'>
+                          <Accordion>
+                            <Panel header='I need mental health help.' eventKey='1'>
+                              <p>Mental Health help</p>
+                              <p>Mental Health help</p>
+                              <p>Mental Health help</p>
+                            </Panel>
+                            <Panel header='I need help finding food.' eventKey='2'>
+                              <p>Food resource</p>
+                              <p>Food resource</p>
+                              <p>Food resource</p>
+                            </Panel>
+                            <Panel header='I need help finding housing.' eventKey='3'>
+                              <p>Housing</p>
+                              <p>Housing</p>
+                              <p>Housing</p>
+                            </Panel>
+                          </Accordion>
+                        </Panel>
+                    </Accordion>
 
                 </div>
 

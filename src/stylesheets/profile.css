@@ -22,9 +22,16 @@
   color: #777;
 }
 
-.envelope {
-  width: 40px;
-  padding: 10px 0;
+.messages {
+  padding: 5px;
+  margin: 5px;
+  align-self: flex-start;
+  transition: all 1s ease;
+  border-radius: 50%;
+}
+.messages:hover {
+  transform: scale(1.5);
+  background-color: #c1dceb;
 }
 
 .initial-circle {

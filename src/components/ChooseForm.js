@@ -68,7 +68,7 @@ class ChooseForm extends React.Component {
         skill_string: dataSource.data
       };
       this.props.postSkill(skill);
-      } else if (this.props.choose==='location'){
+      } else if (this.props.choose==='locations'){
       let location = {
         owner: this.props.userid,
         location: dataSource.id

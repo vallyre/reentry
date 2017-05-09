@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../stylesheets/profile.css';
+import msgicon from '../images/msgicon.png';
 
 class ProfileData extends Component {
 
@@ -23,9 +24,13 @@ class ProfileData extends Component {
                         {this.makeInitials(this.props.currProfile.firstname, this.props.currProfile.lastname)}
                 </div>
                 <div className='profile-data'>
-                        <p className='profile-username'>{this.props.currProfile.firstname} {this.props.currProfile.lastname}</p>
-                        <p className='profile-email'>{this.props.currProfile.emailaddress}</p>
-                        <p className='profile-bio'>{this.props.currProfile.bio}</p>
+                  <p className='profile-username'>{this.props.currProfile.firstname} {this.props.currProfile.lastname}</p>
+                  <p className='profile-email'>{this.props.currProfile.emailaddress}</p>
+                  <p className='profile-bio'>{this.props.currProfile.bio}</p>
+                </div>
+
+                <div className='messages'>
+                  <a href={`${this.props.baseurl}/secondchances/messages`} target='_blank'><img src={msgicon} alt='message center'/></a>
                 </div>
               </div>
             );

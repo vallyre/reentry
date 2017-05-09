@@ -9,12 +9,11 @@ class ShowJobs extends React.Component {
       marginTop: '10px'
     }
 
-
 		return (
         <div style={space}>
         {Object
             .keys(this.props.jobs)
-            .map(key => <Job key={key} job={this.props.jobs[key]}  />)}
+            .map(key => <Job key={key} job={this.props.jobs[key]} baseurl={this.props.baseurl} />)}
         </div>
 		);
 	}
