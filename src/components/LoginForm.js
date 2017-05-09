@@ -25,7 +25,7 @@ class LoginForm extends Component {
     }
     let url = '';
     if (type==='login') {
-      url=`${this.props.baseurl}/api-auth/login/`;
+      url=`${this.props.baseurl}/api/user/login/`;
   } else if (type==='create') {
       url=`${this.props.baseurl}/api/user/`;
   } else {

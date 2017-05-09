@@ -6,12 +6,10 @@ import ChooseForm from './ChooseForm';
 import Chips from './Chips';
 import HeaderBar from './HeaderBar';
 import ShowJobs from './ShowJobs';
-import Post from './Post';
+import PostJob from './PostJob';
 
 let Panel = require('react-bootstrap').Panel;
 let Accordion = require('react-bootstrap').Accordion;
-
-
 
 import axios from 'axios';
 
@@ -60,26 +58,26 @@ class Profile extends Component {
     if (type==='profile') {
       url=`${this.props.baseurl}/api/user_profile/${this.state.userid}/`;
     } else if (type === 'userskills') {
-      url=`${this.props.baseurl}/api/providedskill/`;
+      url=`${this.props.baseurl}/api/providedskill/user/${this.state.userid}/`;
     } else if (type === 'userlocations') {
-      url=`${this.props.baseurl}/api/userlocation/${this.state.userid}/`;
+      url=`${this.props.baseurl}/api/userlocation/user/${this.state.userid}/`;
     } else if (type === 'alllocations') {
       url=`${this.props.baseurl}/api/location/`;
     } else if (type === 'allskills') {
       url=`${this.props.baseurl}/api/skills/`;
     } else if (type === 'userjobs') {
-      url=`${this.props.baseurl}/api/jobmatch/`;
+      url=`${this.props.baseurl}/api/jobmatch/${this.state.userid}/`;
     } else if (type === 'alljobs') {
       url=`${this.props.baseurl}/api/job/`;
     } else if (type === 'myjobs') {
-      url=`${this.props.baseurl}/api/ownedjob/`;
+      url=`${this.props.baseurl}/api/ownedjob/${this.state.userid}/`;
     }
 
     axios
       .get(url).then((response) => {
 
         if (type === 'profile') {
-          let profile = {profile: response.data.results[0]};
+          let profile = {profile: response.data};
           console.log('got profile:', profile);
           this.setState(profile);
           localStorage.setItem('firstname',profile.firstname);
@@ -138,11 +136,10 @@ class Profile extends Component {
     } else {
       return (
 
-        <ProfileForm getProfile={this.getProfile} baseurl={this.props.baseurl} userid={this.state.userid} />
+        <ProfileForm getProfile={this.getData} baseurl={this.props.baseurl} userid={this.state.userid} />
       )
     }
   }
-
 
   postSkill(skill) {
     axios({
@@ -160,7 +157,7 @@ class Profile extends Component {
   postLocation(location) {
     axios({
       method: 'POST',
-      url:`${this.props.baseurl}/api/userlocation/${this.state.userid}/`,
+      url:`${this.props.baseurl}/api/userlocation/`,
       data: location
     }).then((response) => {
       console.log('locationposted!!', response);
@@ -202,6 +199,7 @@ class Profile extends Component {
       getdata = 'userskills';
     } else if (type === 'locations') {
       console.log('waiting on api refactor to enable location deletion');
+      url = `${this.props.baseurl}/api/userlocation/${chip}/`;
     } else {
       console.log('how did you get in deleteChip??')
     }
@@ -265,7 +263,7 @@ class Profile extends Component {
                     </Panel>
 
                     <Panel header="Post A Job" eventKey='3'>
-                      <Post baseurl={this.props.baseurl} allskills={this.state.allskills}/>
+                      <PostJob choose='jobskills' baseurl={this.props.baseurl} allskills={this.state.allskills} userid={this.state.userid} deleteChip={this.deleteChip}/>
                     </Panel>
 
                     <Panel header="Jobs I've Posted" eventKey='4'>

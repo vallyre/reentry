@@ -24,12 +24,19 @@ class ChooseForm extends React.Component {
         arr.push(
           {data: sourceObj[i].skill,
             id: sourceObj[i].id});
-      }
+          }
     } else if (show==='locations') {
       sourceObj = this.props.alllocations;
       for (let i in sourceObj) {
         arr.push(
           { data: sourceObj[i].city,
+            id: sourceObj[i].id});
+          }
+    } else if (show==='jobskills') {
+      sourceObj = this.props.allskills;
+      for (let i in sourceObj) {
+        arr.push(
+          { data: sourceObj[i].skill,
             id: sourceObj[i].id});
           }
         }
@@ -41,6 +48,8 @@ class ChooseForm extends React.Component {
       return 'What are your skills?'
     } else if (choose==='locations') {
       return 'Where would you like to work?'
+    } else if (choose==='jobskills') {
+      return 'Enter some skills for your job.'
     };
   }
 
@@ -59,18 +68,26 @@ class ChooseForm extends React.Component {
         skill_string: dataSource.data
       };
       this.props.postSkill(skill);
-    } else {
+      } else if (this.props.choose==='location'){
       let location = {
         owner: this.props.userid,
         location: dataSource.id
       };
       this.props.postLocation(location);
-    }
-  }
+      } else if (this.props.choose==='jobskills'){
+      let jobskill = {
+        owner: this.props.jobID,
+        skill: dataSource.id,
+        skill_string: dataSource.data
+      };
+      console.log('now well send a post to jobskills');
+      this.props.updateJobskills(jobskill);
+    };
+}
 
   setText() {
     this.setState({
-      hintText: `enter some more ${this.props.choose}`,
+      hintText: `enter some more stuff`,
       searchText: ''
     });
   }

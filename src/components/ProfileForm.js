@@ -38,10 +38,14 @@ class ProfileForm extends React.Component {
       axios({
         method: 'PATCH',
         url: `${this.props.baseurl}/api/user_profile/${this.props.userid}/`,
+        auth: {
+          username: 'admin',
+          password: 'mypassword'
+        },
         data: profile
       }).then((response) => {
         console.log('success!', response);
-        this.props.getProfile();
+        this.props.getProfile('profile');
       }).catch(function(error) {
         console.log(error);
       });

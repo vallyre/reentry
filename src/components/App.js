@@ -29,10 +29,9 @@ class App extends Component {
       method: 'post',
       url: url,
       auth: {
-        username: user.username,
-        password: user.password
+        username: 'admin',
+        password: 'mypassword'
       },
-
       data: user
     }).then((response) => {
       console.log(response);
@@ -49,6 +48,10 @@ class App extends Component {
       console.log(error);
       if (error.response.status===401) {
         document.getElementById('errorMsg').innerHTML='<p style={styles.invalid}>--Invalid Login--</p>';
+      } else if (error.response.status===403) {
+        document.getElementById('errorMsg').innerHTML='<p style={styles.invalid}>--They forbidded it!--</p>';
+      } else if (error.response.status !==401 || error.response.status !==403) {
+        document.getElementById('errorMsg').innerHTML='<p style={styles.invalid}>--Server down at the moment--</p>';
       } else {
         return;
       };

@@ -1,20 +1,35 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import BtnSubmit from './BtnSubmit';
-import axios from 'axios';
+import ChooseForm from './ChooseForm';
+
+import Chip from 'material-ui/Chip';
+
 
 class JobForm extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleChange = this.handleChange.bind(this);
     this.createJob = this.createJob.bind(this);
-    this.postJob = this.postJob.bind(this);
+    this.renderChip = this.renderChip.bind(this);
+    this.updateJobskills = this.updateJobskills.bind(this);
     this.state = {
       owner: localStorage.getItem("userID"),
       title: '',
       description: '',
-      jobID: null
+      jobID: null,
+      jobskills: []
+    };
+    this.styles = {
+      chip: {
+        margin: 4
+      },
+      wrapper: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
+      },
     };
   }
 
@@ -32,23 +47,27 @@ class JobForm extends React.Component {
       title: this.state.title,
       description: this.state.description
     };
-    this.postJob(job);
+    this.props.postJob(job);
   }
 
-  postJob(job) {
-    console.log('in postJob');
+  renderChip(data) {
+    let skillchip = {
+      key: data.skill,
+      label: data.skill_string
+    }
+    return (
+      <Chip key={skillchip.key} style={this.styles.chip}>
+        {skillchip.label}
+      </Chip>
+    );
+  }
 
-    axios({
-      method: 'POST',
-      url: `${this.props.baseurl}/api/job/`,
-      data: job
-    }).then((response) => {
-      console.log('success! job posted', response);
-      this.setState({jobID: response.data.id});
-      this.displayMessage();
-    }).catch(function(error) {
-      console.log(error);
-    })
+  updateJobskills(jobskill) {
+    console.log('updateJobskills', jobskill);
+    let skillstate = this.state.jobskills;
+    skillstate.push(jobskill);
+    this.setState({jobskills: skillstate});
+    this.props.postJobSkill(jobskill);
   }
 
     render() {
@@ -70,6 +89,7 @@ class JobForm extends React.Component {
         }
 
         return (
+          <div>
             <form id='job-form' style={styles.postForm} onSubmit={this.createJob}>
                 <TextField
                   type="text"
@@ -98,6 +118,18 @@ class JobForm extends React.Component {
                   required/>
                 <BtnSubmit type="submit" onClick={(e) => this.createJob(e)}>Create my Job</BtnSubmit>
             </form>
+            <ChooseForm
+              choose={'jobskills'}
+              jobID={this.state.jobID}
+              baseurl={this.props.baseurl}
+              allskills={this.props.allskills}
+              updateJobskills={this.updateJobskills}
+              displayMessage={this.props.displayMessage}
+              owner={this.state.owner} />
+            <div style={this.styles.wrapper}>
+              {this.state.jobskills.map(this.renderChip, this)}
+            </div>
+          </div>
         );
     }
 }
