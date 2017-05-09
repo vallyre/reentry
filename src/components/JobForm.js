@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
-import BtnSubmit from './BtnSubmit';
 import ChooseForm from './ChooseForm';
 
 import Chip from 'material-ui/Chip';
@@ -132,7 +131,7 @@ class JobForm extends React.Component {
                     underlineStyle={styles.underlineStyle}
                     underlineFocusStyle={styles.underlineFocusStyle}
                     required/>
-                  <BtnSubmit type="submit" onClick={(e) => this.createJob(e)}>Create my Job</BtnSubmit>
+                  <button type="submit" onClick={(e) => this.createJob(e)}>Create my Job</button>
                 </form>
               </section>
             ) : (
