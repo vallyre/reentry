@@ -118,6 +118,7 @@ render() {
       <AutoComplete
       id={'chooseForm'}
       filter={AutoComplete.fuzzyFilter}
+      listStyle={{ maxHeight: 200, overflow: 'auto' }}
       openOnFocus={true}
       dataSource={autoData}
       dataSourceConfig={dataSourceConfig}

@@ -36,7 +36,8 @@ class PostJob extends Component {
     }).then((response) => {
       console.log('success! job posted', response);
       this.setState({jobID: response.data.id});
-      this.getData('myjobs');
+      this.props.getData('myjobs');
+      this.props.getData('alljobs');
       this.displayMessage();
     }).catch(function(error) {
       console.log(error);
@@ -56,6 +57,7 @@ class PostJob extends Component {
         {label: jobskill.skill_string,
          key: jobskill.skill});
       this.setState({jobskills: thisskills});
+      this.props.getData('myjobs');
       console.log('jobskill posted!!', response);
 
     }).catch(function(error) {
