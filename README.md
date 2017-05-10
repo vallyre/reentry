@@ -1,5 +1,5 @@
 # reEntry
-## An app to aid formerly incarcerated people.
+### *An app to aid formerly incarcerated people.*
 
 React.js front-end to hit python/django RESTful API.  
 Currently in development - to be presented mid-May.
