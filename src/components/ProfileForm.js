@@ -1,8 +1,8 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
-import BtnSubmit from './BtnSubmit';
 import axios from 'axios';
 
+const Button = require('react-bootstrap').Button;
 
 class ProfileForm extends React.Component {
 
@@ -126,7 +126,7 @@ class ProfileForm extends React.Component {
                   hintStyle={styles.hintStyle}
                   underlineStyle={styles.underlineStyle}
                   underlineFocusStyle={styles.underlineFocusStyle}/>
-                <BtnSubmit type="submit" onClick={(e) => this.createProfile(e)}>Make my Profile</BtnSubmit>
+                <Button bsSize='small' bsStyle='primary' type="submit" onClick={(e) => this.createProfile(e)}>Make my Profile</Button>
             </form>
         );
     }

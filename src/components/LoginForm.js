@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
-import BtnSubmit from './BtnSubmit';
 import DjangoCSRFToken from 'django-react-csrftoken';
+
+let Button = require('react-bootstrap').Button;
 
 class LoginForm extends Component {
 
@@ -100,17 +101,29 @@ class LoginForm extends Component {
           />
         <DjangoCSRFToken/>
         <div style={styles.buttons}>
-          <div style={styles.invalid} id='errorMsg'></div>
-          <BtnSubmit
+          <div style={styles.invalid} id='errorMsg'>
+
+          </div>
+          <div className='login-buttons'>
+            <Button
+            bsSize='large'
+            bsStyle='primary'
             type="submit"
             onClick={(e) => this.loginUser(e, 'login')}>
             Login Account
-          </BtnSubmit>
-          <BtnSubmit
-            type="submit"
-            onClick={(e) => this.loginUser(e, 'create')}>
-            Create Account
-          </BtnSubmit>
+            </Button>
+          </div>
+          <p>-or-</p>
+          <div className='login-buttons'>
+            <Button
+              bsSize='large'
+              bsStyle='primary'
+              type="submit"
+              onClick={(e) => this.loginUser(e, 'create')}>
+              Create Account
+            </Button>
+          </div>
+
         </div>
 
       </form>

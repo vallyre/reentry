@@ -1,8 +1,9 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import ChooseForm from './ChooseForm';
-
 import Chip from 'material-ui/Chip';
+
+let Button = require('react-bootstrap').Button;
 
 
 class JobForm extends React.Component {
@@ -131,7 +132,7 @@ class JobForm extends React.Component {
                     underlineStyle={styles.underlineStyle}
                     underlineFocusStyle={styles.underlineFocusStyle}
                     required/>
-                  <button type="submit" onClick={(e) => this.createJob(e)}>Create my Job</button>
+                  <Button bsSize='small' bsStyle='primary' type="submit" onClick={(e) => this.createJob(e)}>Create my Job</Button>
                 </form>
               </section>
             ) : (
@@ -152,9 +153,9 @@ class JobForm extends React.Component {
           )
         }
         {(this.state.jobskills.length>0) ? (
-          <button onClick={this.showForm}>Enter Another Job</button>
+          <Button bsSize='small' bsStyle='primary' onClick={this.showForm}>Enter Another Job</Button>
         ) : (
-          <p></p>
+          <p>&nbsp;</p>
         )}
           </div>
         );

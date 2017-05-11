@@ -19,9 +19,11 @@ class ProfileData extends Component {
     render() {
 
         return (
-            <div className='profile-container'>
+          <div className='profile-container'>
+
+            <div className='profile-flex'>
                 <div className='initial-circle'>
-                        {this.makeInitials(this.props.currProfile.firstname, this.props.currProfile.lastname)}
+                  {this.makeInitials(this.props.currProfile.firstname, this.props.currProfile.lastname)}
                 </div>
                 <div className='profile-data'>
                   <p className='profile-username'>{this.props.currProfile.firstname} {this.props.currProfile.lastname}</p>
@@ -33,6 +35,7 @@ class ProfileData extends Component {
                   <a href={`${this.props.baseurl}/secondchances/messages/${this.props.currProfile.user}/`} target='_blank'><img src={msgicon} alt='message center'/></a>
                 </div>
               </div>
+            </div>
             );
           }
         }

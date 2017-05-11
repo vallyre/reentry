@@ -8,8 +8,10 @@ import HeaderBar from './HeaderBar';
 import ShowJobs from './ShowJobs';
 import PostJob from './PostJob';
 
-let Panel = require('react-bootstrap').Panel;
-let Accordion = require('react-bootstrap').Accordion;
+const Panel = require('react-bootstrap').Panel;
+const Accordion = require('react-bootstrap').Accordion;
+const Button = require('react-bootstrap').Button;
+
 
 import axios from 'axios';
 
@@ -269,11 +271,11 @@ class Profile extends Component {
                         <Panel header="Jobs Matched To You" eventKey='3'>
                           <h1>You've matched {this.state.userjobs.length} jobs</h1>
                           <p>Click a job to view details.</p>
-                          <ShowJobs jobs={this.state.userjobs} baseurl={this.props.baseurl} />
+                          <ShowJobs jobs={this.state.userjobs} baseurl={this.props.baseurl} userid={this.state.userid}/>
                         </Panel>
 
                         <Panel header="View All Jobs" eventKey='4'>
-                          <ShowJobs jobs={this.state.alljobs} baseurl={this.props.baseurl}/>
+                          <ShowJobs jobs={this.state.alljobs} baseurl={this.props.baseurl} userid={this.state.userid}/>
                         </Panel>
 
                         <Panel header="Post Your Job" eventKey='5'>
@@ -281,11 +283,11 @@ class Profile extends Component {
                         </Panel>
 
                         <Panel header="Jobs You've Posted" eventKey='6'>
-                          <ShowJobs jobs={this.state.myjobs} baseurl={this.props.baseurl} />
+                          <ShowJobs jobs={this.state.myjobs} baseurl={this.props.baseurl} userid={this.state.userid} />
                         </Panel>
 
                         <Panel header='Your Messages' eventKey='7'>
-                          <button><a href={`${this.props.baseurl}/secondchances/messages`} target='_blank' >Click to enter the Message Center</a></button>
+                          <Button bsSize='small' bsStyle='primary' href={`${this.props.baseurl}/secondchances/messages`}> Click to enter the Message Center</Button>
                         </Panel>
 
                         <Panel header='Resources' eventKey='8'>

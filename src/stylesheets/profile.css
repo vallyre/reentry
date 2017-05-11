@@ -1,10 +1,12 @@
 .profile-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 10px;
   background-color: #fff;
   padding: 10px;
+}
+.profile-flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .profile-data {
@@ -23,11 +25,13 @@
 }
 
 .messages {
-  padding: 5px;
-  margin: 10px 5px;
-  align-self: flex-start;
+  width: 50px;
+  height: 50px;
   transition: all 1s ease;
   border-radius: 50%;
+  margin: 15px;
+  padding: 5px;
+  flex-shrink: 0;
 }
 .messages:hover {
   transform: scale(1.5);
@@ -35,12 +39,10 @@
 }
 
 .initial-circle {
-  width: 50px;
-  height: 50px;
   background-color: #d9b310;
   border-radius: 50%;
   padding: 10px;
-  margin: 20px;
+  margin: 15px;
   min-width: 80px;
   min-height: 80px;
 }
@@ -63,4 +65,20 @@
 
 .panel-body {
   transition: all 1s ease;
+}
+
+button {
+  margin: 10px 0;
+  max-width: 300px;
+  width: 100%;
+  background-color: #328cc1;
+  transition: all .5s ease;
+}
+button:hover {
+  background-color: #083c5d;
+  transform: scale(1.1);
+  color:  #d9b310;
+}
+#jobform {
+  padding-bottom: 10px;
 }

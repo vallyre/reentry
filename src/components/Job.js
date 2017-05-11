@@ -11,6 +11,7 @@ class Job extends React.Component {
     super();
     this.getJobSkills=this.getJobSkills.bind(this);
     this.renderChip=this.renderChip.bind(this);
+    this.handleRedirect=this.handleRedirect.bind(this);
     this.state = {
       open: false,
       jobskills: []
@@ -59,6 +60,9 @@ class Job extends React.Component {
         </Chip>)
   }
 
+  handleRedirect() {
+    window.location = `${this.props.baseurl}/secondchances/conversation/${this.props.userid}/${this.props.job.owner}/`;
+  }
 
   render() {
 
@@ -82,6 +86,7 @@ class Job extends React.Component {
     }
 
 
+
 		return (
       <div style={jobcontainer}>
         <p style={jobheader} onClick={ () => this.setState({open: !this.state.open})}>{this.props.job.title}</p>
@@ -94,7 +99,7 @@ class Job extends React.Component {
           :  (<p>No specific skills required</p>)}
         </div>
 
-          <Button bsSize='xsmall'>Message the Job Owner</Button>
+          <Button bsSize='small' bsStyle='primary' onClick={this.handleRedirect}>Message the Job Owner</Button>
         </Panel>
       </div>
 		);

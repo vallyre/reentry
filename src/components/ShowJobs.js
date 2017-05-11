@@ -13,7 +13,7 @@ class ShowJobs extends React.Component {
         <div style={space}>
         {Object
             .keys(this.props.jobs)
-            .map(key => <Job key={key} job={this.props.jobs[key]} baseurl={this.props.baseurl} />)}
+            .map(key => <Job key={key} job={this.props.jobs[key]} baseurl={this.props.baseurl} userid={this.props.userid} />)}
         </div>
 		);
 	}
