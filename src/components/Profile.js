@@ -287,7 +287,7 @@ class Profile extends Component {
                         </Panel>
 
                         <Panel header='Your Messages' eventKey='7'>
-                          <Button bsSize='small' bsStyle='primary' href={`${this.props.baseurl}/secondchances/messages`}> Click to enter the Message Center</Button>
+                          <Button bsSize='small' bsStyle='primary' href={`${this.props.baseurl}/secondchances/messages/${this.state.userid}/`}> Click to enter the Message Center</Button>
                         </Panel>
 
                         <Panel header='Resources' eventKey='8'>
