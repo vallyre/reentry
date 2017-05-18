@@ -11,6 +11,7 @@ class JobForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.cleanInput = this.cleanInput.bind(this);
     this.createJob = this.createJob.bind(this);
     this.renderChip = this.renderChip.bind(this);
     this.showForm = this.showForm.bind(this);
@@ -40,6 +41,11 @@ class JobForm extends React.Component {
     newState[e.target.name] = e.target.value;
     this.setState(newState);
   }
+  cleanInput() {
+    this.setState({
+      name: ''
+    })
+  }
 
   createJob(event) {
     event.preventDefault();
@@ -50,7 +56,8 @@ class JobForm extends React.Component {
       description: this.state.description
     };
     this.props.postJob(job);
-    this.setState({showform: false})
+    this.setState({showform: false});
+    this.cleanInput();
   }
 
   renderChip(data) {
