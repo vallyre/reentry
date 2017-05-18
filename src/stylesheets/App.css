@@ -3,6 +3,10 @@ body {
   background-color: #eee;
   text-align: center;
 }
+main {
+  max-width: 800px;
+  margin: 0 auto;
+}
 
 input {
   text-align: center;
@@ -13,4 +17,19 @@ h2 {
 }
 .space-after {
   margin-bottom: 30px;
+}
+@media screen and (min-width: 800px) {
+  body {
+    background-color: #ccd7dd;
+    background-image:
+    radial-gradient(circle at 100% 150%, #ccd7dd 24%, #ddd 25%, #ddd 28%, #ccd7dd 29%, #ccd7dd 36%, #ddd 36%, #ddd 40%, transparent 40%, transparent),
+    radial-gradient(circle at 0    150%, #ccd7dd 24%, #ddd 25%, #ddd  28%, #ccd7dd 29%, #ccd7dd 36%, #ddd 36%, #ddd 40%, transparent 40%, transparent),
+    radial-gradient(circle at 50%  100%, #ddd 10%, #ccd7dd 11%, #ccd7dd 23%, #ddd 24%, #ddd 30%, #ccd7dd 31%, #ccd7dd 43%, #ddd 44%, #ddd 50%, #ccd7dd 51%, #ccd7dd 63%, #ddd 64%, #ddd 71%, transparent 71%, transparent),
+    radial-gradient(circle at 100% 50%, #ddd 5%, #ccd7dd 6%, #ccd7dd 15%, #ddd 16%, #ddd 20%, #ccd7dd 21%, #ccd7dd 30%, #ddd 31%, #ddd 35%, #ccd7dd 36%, #ccd7dd 45%, #ddd 46%, #ddd 49%, transparent 50%, transparent),
+    radial-gradient(circle at 0    50%, #ddd 5%, #ccd7dd 6%, #ccd7dd 15%, #ddd 16%, #ddd 20%, #ccd7dd 21%, #ccd7dd 30%, #ddd 31%, #ddd 35%, #ccd7dd 36%, #ccd7dd 45%, #ddd 46%, #ddd 49%, transparent 50%, transparent);
+    background-size:100px 50px;
+  }
+  main {
+    border: 2px solid #ddd;
+  }
 }

@@ -8,7 +8,6 @@ const Header = (props) => {
         headerBar: {
           backgroundColor: '#c1dceb',
           borderBottom: '1px solid #328cc1',
-          boxShadow: '2px 2px 5px #000',
           width: '100%'
         },
         smallLogo: {

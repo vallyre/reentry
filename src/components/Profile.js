@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Header from './Header';
+import Footer from './Footer';
 import ProfileData from './ProfileData';
 import ProfileForm from './ProfileForm';
 import ChooseForm from './ChooseForm';
@@ -226,7 +227,8 @@ class Profile extends Component {
         const styles = {
 
             profileBody: {
-                backgroundColor: '#ccc'
+                backgroundColor: '#ccc',
+                paddingBottom: '20px'
             },
             chipsContainer: {
                 display: 'flex',
@@ -312,6 +314,7 @@ class Profile extends Component {
                     </Accordion>
 
                 </div>
+                <Footer />
 
             </div>
         );
