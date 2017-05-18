@@ -6,7 +6,7 @@ Currently in development - to be presented mid-May.
 Designed as a mobile-first app, incorporates react-bootstrap (3) as well as Material UI.
 
 Front-end deployed on Heroku free server
-https://floating-beach-82390.herokuapp.com/
+https://reentry123.herokuapp.com/
 
 Back-end deployed on Heroku free server
 /arcane-hollows-70832.herokuapp.com/api/
