@@ -60,7 +60,6 @@ class ChooseForm extends React.Component {
       searchText: ''
     });
 
-    console.log(dataSource);
     if (this.props.choose==='skills') {
       let skill = {
         owner: this.props.userid,
@@ -80,7 +79,6 @@ class ChooseForm extends React.Component {
         skill: dataSource.id,
         skill_string: dataSource.data
       };
-      console.log('now well send a post to jobskills');
       this.props.updateJobskills(jobskill);
     };
 }

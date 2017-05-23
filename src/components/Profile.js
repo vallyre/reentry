@@ -82,48 +82,38 @@ class Profile extends Component {
 
         if (type === 'profile') {
           let profile = {profile: response.data};
-          console.log('got profile:', profile);
           this.setState(profile);
           localStorage.setItem('firstname',profile.firstname);
           this.showProfileForm();
         } else if (type === 'userskills') {
           let thing = response.data.results;
-          console.log('got userskills:', thing);
           let skills=[];
           for (let i in thing) {
             skills.push({"key":thing[i].id, "label": thing[i].skill_string});
           };
-          console.log('skills: ', skills);
           this.setState({userskills: skills});
           return;
         } else if (type === 'userlocations') {
           let thing = response.data.results;
-          console.log('got userlocation:', thing);
           let locations=[];
           for (let i in thing) {
             locations.push({"key":thing[i].id, "label": thing[i].location_string});
           };
-          console.log('locations: ', locations);
           this.setState({userlocations: locations});
         } else if (type === 'allskills'){
           let allskills = {allskills: response.data.results};
-          console.log('got allskills: ', allskills);
           this.setState(allskills);
         } else if (type === 'alllocations') {
           let alllocations = {alllocations: response.data.results};
-          console.log('got alllocations: ', alllocations);
           this.setState(alllocations);
         } else if (type === 'userjobs') {
           let userjobs = {userjobs: response.data.results};
-          console.log('got userjobs: ', userjobs);
           this.setState(userjobs);
         } else if (type === 'alljobs') {
           let alljobs = {alljobs: response.data.results};
-          console.log('got alljobs: ', alljobs);
           this.setState(alljobs);
         } else if (type === 'myjobs') {
           let myjobs = {myjobs: response.data.results};
-          console.log('got myjobs: ', myjobs);
           this.setState(myjobs);
         } else {return};
     }).catch(function(error) {
@@ -151,7 +141,6 @@ class Profile extends Component {
       url:`${this.props.baseurl}/api/providedskill/`,
       data: skill
     }).then((response) => {
-      console.log('skillposted!!', response);
       this.getData('userskills');
       this.getData('userjobs');
     }).catch(function(error) {
@@ -160,13 +149,11 @@ class Profile extends Component {
   }
 
   postLocation(location) {
-    console.log('in postLocation');
     axios({
       method: 'POST',
       url:`${this.props.baseurl}/api/userlocation/`,
       data: location
     }).then((response) => {
-      console.log('locationposted!!', response);
       this.getData('userlocations');
       this.getData('userjobs');
     }).catch(function(error) {
@@ -175,22 +162,18 @@ class Profile extends Component {
   }
 
   getId(chip, type) {
-    console.log('in getId', chip, type);
     if (type === 'skill') {
       let skills = this.state.alluserskills;
       let selectedSkill = skills.find(function (skill) {
         return skill.skill_string === chip
       });
-      console.log('skill id match', selectedSkill);
       selectedSkill ? this.deleteChip(selectedSkill, 'skills'):console.log('no match');
     } else if (type ==='location') {
       let locations = this.state.alllocations;
       let shortcity = chip.substring(0, chip.length-4);
-      console.log('locations', locations);
       let selectedLocation = locations.find(function (location) {
         return location.city === shortcity
       });
-      console.log('shortcity', shortcity);
       console.log('location id match', selectedLocation);
     } else {
       console.log('what called the getId function???')
@@ -214,7 +197,6 @@ class Profile extends Component {
       method: 'DELETE',
       url: url,
     }).then((response) => {
-      console.log('chip deleted!');
       this.getData(getdata);
       this.getData('userjobs');
     }).catch(function(error) {

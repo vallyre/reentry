@@ -22,7 +22,6 @@ class ProfileForm extends React.Component {
 
     createProfile(event) {
       event.preventDefault();
-        console.log('in createProfile');
         const profile = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
@@ -33,7 +32,6 @@ class ProfileForm extends React.Component {
     }
 
     setProfile(profile) {
-      console.log('in setProfile');
 
       axios({
         method: 'PATCH',
@@ -44,7 +42,6 @@ class ProfileForm extends React.Component {
         },
         data: profile
       }).then((response) => {
-        console.log('success!', response);
         this.props.getProfile('profile');
       }).catch(function(error) {
         console.log(error);

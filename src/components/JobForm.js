@@ -49,7 +49,6 @@ class JobForm extends React.Component {
 
   createJob(event) {
     event.preventDefault();
-    console.log('in createJob');
     const job = {
       owner: this.state.owner,
       title: this.state.title,
@@ -73,7 +72,6 @@ class JobForm extends React.Component {
   }
 
   updateJobskills(jobskill) {
-    console.log('updateJobskills', jobskill);
     let skillstate = this.state.jobskills;
     skillstate.push(jobskill);
     this.setState({jobskills: skillstate});

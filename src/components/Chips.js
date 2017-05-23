@@ -26,7 +26,6 @@ class Chips extends React.Component {
 
 
 	handleRequestDelete = (key) => {
-	  console.log('You clicked the delete button.');
 
 		this.chipData = this.props.chipData;
 		const chipToDelete = this.chipData.map((chip) => chip.key).indexOf(key);

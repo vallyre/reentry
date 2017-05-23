@@ -18,13 +18,13 @@ class App extends Component {
       this.state = {
           username: '',
           userid: null,
+          // baseurl: `https://reentry.herokuapp.com`
           baseurl: `https://arcane-hollows-70832.herokuapp.com`
           // baseurl: `https://${window.location.host}`
       };
   }
 
   setUser(user, url) {
-    console.log('in setUser: ', user, url);
     axios({
       method: 'post',
       url: url,
@@ -34,14 +34,11 @@ class App extends Component {
       },
       data: user
     }).then((response) => {
-      console.log(response);
       let userid=response.data.id;
       this.setState({userid});
       this.setState(user);
       localStorage.setItem('userID', `${this.state.userid}`);
       localStorage.setItem('username', `${this.state.username}`);
-      console.log('id: ', userid);
-      console.log('user', user);
       browserHistory.push('/profile');
     })
     .catch(function(error) {

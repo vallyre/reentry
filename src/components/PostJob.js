@@ -27,14 +27,12 @@ class PostJob extends Component {
   }
 
   postJob(job) {
-    console.log('in postJob');
 
     axios({
       method: 'POST',
       url: `${this.props.baseurl}/api/job/`,
       data: job
     }).then((response) => {
-      console.log('success! job posted', response);
       this.setState({jobID: response.data.id});
       this.props.getData('myjobs');
       this.props.getData('alljobs');
@@ -46,7 +44,6 @@ class PostJob extends Component {
 
   postJobSkill(jobskill) {
     jobskill.owner = this.state.jobID
-    console.log('jobskill', jobskill);
     axios({
       method: 'POST',
       url: `${this.props.baseurl}/api/requiredskill/`,
@@ -58,7 +55,6 @@ class PostJob extends Component {
          key: jobskill.skill});
       this.setState({jobskills: thisskills});
       this.props.getData('myjobs');
-      console.log('jobskill posted!!', response);
 
     }).catch(function(error) {
       console.log(error);

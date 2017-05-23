@@ -35,11 +35,9 @@ class Job extends React.Component {
   }
 
   getJobSkills() {
-    console.log('getJobSkills', this.props.job.title, this.props.job.id);
     axios
     .get(`${this.props.baseurl}/api/requiredskill/job/${this.props.job.id}`)
     .then((response) => {
-      console.log('JobID: ', this.props.job.id, response);
       let jskills= response.data.results;
       let jskillArr = []
         for (let i in jskills) {

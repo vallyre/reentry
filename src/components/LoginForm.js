@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import DjangoCSRFToken from 'django-react-csrftoken';
+import axios from 'axios';
 
 let Button = require('react-bootstrap').Button;
 
@@ -17,9 +18,17 @@ class LoginForm extends Component {
       };
   }
 
+  componentDidMount() {
+    axios.get(`${this.props.baseurl}/api/skills/`)
+    .then((response) => {
+    console.log('cursory get request to base url to spin up heroku server');
+  }).catch(function(error) {
+      console.log(error);
+  });
+}
+
   loginUser(event, type) {
     event.preventDefault();
-    console.log('in loginUser: ');
     const user = {
       username: this.state.username,
       password: this.state.password,
